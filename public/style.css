@@ -1,0 +1,381 @@
+/* Estilo general para el cuerpo de la página */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  padding-top: 120px;
+  position: relative;
+  color: #4B4453;  /* Texto principal en lila oscuro */
+}
+
+/* Fondo con imagen semitransparente */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+ /* background-image: url('imagenes/portada.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;*/
+  opacity: 0.7;  
+  z-index: -1;
+  filter: blur(3px);  
+}
+
+/* Encabezado con tonos lilas */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(145deg, #8C7AE6, #A29BFE); /* Lila degradado */
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  font-size: 2rem;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+
+/* Estilo para las tarjetas */
+.card {
+  background-color: rgba(255, 255, 255, 0.95); 
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(140, 122, 230, 0.2); 
+  padding: 25px;
+  margin: 15px; /* Margen entre tarjetas */
+  text-align: center;
+  max-width: 275px;
+  min-width: 250px; /* Evita que la tarjeta sea muy delgada */
+  transition: transform 0.3s ease;
+}
+
+
+.card-deck {
+  margin: 25px;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;  /* La imagen se ajusta dentro del contenedor sin recortarse */
+}
+
+.card h5 {
+  height: 70px;
+}
+
+.badge-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.badge-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.card .badge {
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* Botón con tonos lilas */
+button {
+  background-color: #6C5CE7;  /* Lila oscuro */
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #5A47C7;  /* Lila más oscuro al hacer hover */
+}
+
+/* Estilo del formulario */
+.formjuego {
+  margin: 40px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(120, 111, 166, 0.3);
+  width: 300px;
+}
+
+/* Inputs del formulario */
+input[type="text"],
+input[type="password"],
+input[type="search"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #A29BFE;
+  border-radius: 8px;
+}
+
+
+
+/* Contenedor de resultados */
+#resultadoBusqueda {
+  padding: 20px;
+  border: 2px solid #A29BFE;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.95);
+  margin: 30px auto;
+  max-width: 800px;
+}
+
+/* Modal Estilo */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  max-width: 600px;  /* Ancho máximo del modal */
+  margin: 30px auto; /* Centrado vertical y horizontal */
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden; /* Evita que los elementos sobresalgan */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-body {
+  max-height: 600px; /* Altura máxima del cuerpo del modal */
+  overflow-y: auto;  /* Habilita el desplazamiento vertical si es necesario */
+  padding: 20px;
+}
+
+.modal-header {
+  background: linear-gradient(145deg, #8C7AE6, #A29BFE);
+  padding: 15px;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  position: relative;
+}
+
+.modal-header h2 {
+  margin: 0;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #F1EFFF;
+}
+
+.botones-container {
+  display: flex;             /* Flexbox para alineación horizontal */
+  justify-content: start;    /* Alineación a la izquierda (puedes usar center o space-around) */
+  gap: 15px;                 /* Espacio uniforme entre botones */
+  margin-top: 20px;          /* Separación del contenido superior */
+}
+
+
+/* Botón Añadir (Estilo flotante) */
+.btnadd {
+  background-color: #8C7AE6;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: auto;
+}
+
+.btnadd:hover {
+  background-color: #A29BFE;
+}
+
+
+#btn-prestar,#btn-prestar2 {
+  background-color: #28a745;  /* Verde para indicar acción positiva */
+  color: white;               /* Texto blanco para contraste */
+  border: none;
+  cursor: pointer;
+}
+
+#btn-prestar:hover,#btn-prestar2:hover {
+  background-color: #218838;  /* Oscurecimiento al pasar el ratón */
+}
+
+#btn-devolver {
+  background-color: #ee6910;  /* Rojo para indicar devolución */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#btn-devolver:hover {
+  background-color: #dc6a35;  /* Oscurecimiento en hover */
+}
+
+#btn-eliminar {
+  background-color: #dc3545;  /* Rojo para indicar devolución */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#btn-eliminar:hover {
+  background-color: #c82333;  /* Oscurecimiento en hover */
+}
+/* Animación sutil de aparición */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+input[type="file"] {
+  font-size: 0.9rem;
+  padding: 5px;
+}
+
+input[type="file"]:focus {
+  outline: 2px solid #007bff;
+}
+
+
+/* Asegúrate de que el input de archivo tenga el margen adecuado */
+#manual,#foto {
+  margin-bottom: 10px; /* Añade espacio debajo del campo de archivo */
+  display: block; /* Hace que el input esté en su propia línea */
+  width: 100%; /* Asegura que el campo de archivo ocupe el 100% del contenedor */
+}
+
+/* Contenedor que agrupa los elementos informativos y el botón */
+.mostrarmanual,.mostrarFoto {
+  display: block; /* Hace que el contenedor ocupe toda la línea disponible */
+}
+
+/* Asegura que los elementos dentro de mostrarCv estén en su propia línea */
+#archivomanual, #linkmanual, #cambiarmanualBtn,
+#fileFoto,#fotoBtn {
+  display: block; /* Cada uno ocupa una línea completa */
+  margin-top: 10px; /* Espacio entre los elementos */
+  margin-bottom: 20px; /* Espacio inferior para separar los elementos */
+}
+
+/* Estilo para la información de archivo */
+.file-info {
+  font-size: 0.9em;
+  color: #555;
+}
+
+/* Botón para cambiar el CV */
+#cambiarmanualBtn,#fotoBtn {
+  margin-top: 10px; /* Espacio superior para el botón */
+  padding: 10px 15px; /* Espaciado dentro del botón */
+  width: 190px; 
+  color: white; /* Color del texto */
+  border: none; /* Elimina el borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor a mano */
+  font-size: 16px; /* Tamaño de la fuente */
+  text-align: center; /* Centra el texto dentro del botón */
+}
+
+/* Enlace de descarga */
+#linkmanual a {
+  color: #007bff;
+  text-decoration: underline; /* Subrayado para el enlace */
+  font-weight: bold;
+}
+
+#successModalMessage{
+  margin-top: 20px;
+}
+
+.file-input-container {
+  margin-top: 10px; /* Agrega margen superior para separar el input file del select */
+}
+
+
+/* Estilos para pantallas de tablet (entre 600px y 900px) */
+@media (max-width: 900px) {
+  .btnadd {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    bottom: 20px;
+    right: 20px;
+  }
+  .card-deck {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Estilos para pantallas de móvil (menos de 600px) */
+@media (max-width: 600px) {
+  .btnadd {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+    bottom: 15px;
+    right: 15px;
+  }
+  .card-deck {
+    grid-template-columns: 1fr;
+  }
+}
+
+.modal-content.eliminar {
+  width: 500px;
+}
+
+.modal-content.devolver {
+  width: 500px;
+}
+

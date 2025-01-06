@@ -1,0 +1,67 @@
+<!-- Modal para añadir/modificar juegos -->
+<div id="juegoModal" class="modal" tabindex="0">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Nuevo Juego</h2>
+            <span class="close" id="cerrarJuegoModal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="crearJuegoForm" enctype="multipart/form-data">
+                <!-- Campo oculto para el ID del juego -->
+                <input type="hidden" id="juegoId" value="">
+
+                <!-- Nombre del juego -->
+                <div class="input-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" class="form-field" required>
+                </div>
+
+                <!-- Descripción del juego -->
+                <div class="input-group">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" class="form-field" required></textarea>
+                </div>
+
+                <!-- Subida de foto del juego -->
+                <div class="input-group">
+                    <label for="foto">Foto:</label>
+                    <input type="file" id="foto" name="foto" class="form-field" accept=".jpg,.png" required>
+                    <div class="mostrarFoto">
+                        <span id="fileFoto" class="file-info"></span>
+                        <button type="button" id="fotoBtn" class="btn btn-secondary" style="display: none;">Cambiar Foto</button>
+                    </div>
+                </div>
+
+                <!-- Estado de préstamo -->
+                <div class="input-group">
+                    <label for="prestado">Prestado:</label>
+                    <select id="prestado" name="prestado" class="form-field" required>
+                        <option value="false">No</option>
+                        <option value="true">Sí</option>
+                    </select>
+                </div>
+
+                <!-- Alumno que tiene prestado el juego -->
+                <div class="input-group">
+                    <label for="alumno">Alumno (si está prestado):</label>
+                    <input type="text" id="alumno" name="alumno" class="form-field">
+                </div>
+
+                <!-- Manual del juego -->
+                <div class="input-group">
+                    <label for="manual">Manual:</label>
+                    <textarea id="manual" name="manual" class="form-field"></textarea>
+                </div>
+
+                <!-- Mensaje si no hay cambios -->
+                <div id="mensajeSinCambios" style="color: red; display: none; font-weight: bold; margin: 10px;">
+                    No se han realizado cambios.
+                </div>
+
+                <!-- Botones de acción -->
+                <button type="submit" id="btn-guardar" class="btn btn-primary">Guardar</button>
+                <button type="button" id="btn-modificar" class="btn btn-secondary" style="display: none;">Modificar</button>
+            </form>
+        </div>
+    </div>
+</div>

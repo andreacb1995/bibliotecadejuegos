@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca del Juego</title>
+    <!-- Link a la librería de Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <!-- Link a la librería Bootstrap para estilos CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Archivo de estilos personalizados -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+      
+    </style>
+</head>
+<body>
+    <!-- Encabezado principal de la página -->
+    <header>
+        <h1>Biblioteca del Juego</h1>
+        <button id="addJuego" class= "btnadd"><i class="fas fa-plus"></i></button> <!-- Botón de añadir juego -->
+
+    </header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+    
+        <!-- Botón responsive para móviles -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo01">
+          <!-- Formulario de búsqueda alineado a la derecha -->
+          <form class="form-inline">
+            <!-- Campo de búsqueda para ingresar el ID del juego -->
+            <input class="form-control mr-sm-2" id="IdJuego" type="search" placeholder="Buscar" aria-label="Buscar" onkeyup="buscarJuego()">
+            <!-- Filtro por estado de préstamo -->
+            <select class="form-control ml-2 mr-4" id="filtroPrestamo" onchange="buscarJuego()">
+              <option value="todos">Todos</option>
+              <option value="prestados">Prestados</option>
+              <option value="disponibles">Disponibles</option>
+            </select>
+        </form>
+        </div>
+      </div>
+      
+    </nav>
+  
+    <!-- Contenedor para mostrar las tarjetas de juegos -->
+    <div id="tarjetasJuegos" class="card-deck"></div>
+
+    <!-- Modal para añadir juego -->
+    <div id="formModal" class="modal"  tabindex="0">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Nuevo Juego</h2>
+            <span class="close" id="cerrarModal">&times;</span>
+          </div>
+          <div class="modal-body">
+            <form id="crearJuegoForm"  enctype="multipart/form-data">
+              <!-- Campo oculto para el ID de la empresa -->
+              <input type="hidden" id="juegoId" value=""> <!-- ID de la empresa -->
+            
+              <div class="input-group" >
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" class="form-field" required>
+              </div>
+              <div class="input-group" >
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion" class="form-field" required>
+              </div>
+              <div class="input-group" >
+                <label for="numero">Número:</label>
+                <input type="text" id="numero" name="numero" class="form-field" required>
+              </div>
+              <div class="input-group" style="display: none;" id="alumno">
+                <label for="alumno">Alumno Préstamo:</label>
+                <input type="text" id="alumnop" name="alumnop" class="form-field">
+              </div>
+              <div class="input-group">
+                <label for="foto">Foto:</label>
+                <input type="file" id="foto" name="foto" class="form-field" accept=".jpg,.png">
+                <div class="mostrarFoto">
+                  <span id="fileFoto" class="file-info"></span>
+                  <button type="button" id="fotoBtn" class="btn btn-secondary" style="display: none;">Cambiar Foto</button> <!-- Botón para cambiar la foto -->
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label for="manual">Manual:</label>
+                <input type="file" id="manual" name="manual" class="form-field" accept=".pdf">
+                <div class="mostrarmanual">
+                  <span id="archivomanual" class="file-info"></span>
+                  <div id="linkmanual"></div> <!-- Contenedor para el enlace de descarga -->
+                  <button type="button" id="cambiarmanualBtn" class="btn btn-secondary" style="display: none;" >Cambiar Manual</button> <!-- Botón para cambiar el Manual -->
+                </div>
+              </div>
+
+              <!-- Añadir un contenedor para el mensaje de "No hay cambios" -->
+              <div id="mensajeSinCambios" style="color: red; display: none; font-weight: bold; margin: 10px;">
+                No se han realizado cambios.
+              </div>
+              <div class="botones-container">
+                <button type="submit" id="btn-guardar" class="btn btn-secondary ">Guardar</button>
+                <button type="submit" id="btn-modificar" class="btn btn-secondary" style="display: none;" >Modificar</button>
+                <button type="submit" id="btn-prestar" class="btn btn-secondary" style="display: none;" >Prestar</button>
+                <button type="submit" id="btn-devolver" class="btn btn-secondary" style="display: none;" >Devolver</button>
+                <button type="submit" id="btn-eliminar" class="btn btn-secondary" style="display: none;" >Eliminar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>         
+    </div>  
+  
+    <!-- Modal de Confirmación de Eliminación -->
+    <div id="confirmEliminarModal" class="modal fade-in" style="display:none;">
+      <div class="modal-content eliminar">
+        <span class="close" id="cerrarDeleteModal">&times;</span>
+        <div class="modal-header">
+          <h2>Confirmar Eliminación</h2>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de que deseas eliminar este juego? Esta acción no se puede deshacer.</p>
+        </div>
+        <div class="modal-footer">
+          <button id="confirmEliminarButton" class="confirm-button btn-danger">Eliminar</button>
+          <button id="cancelarElimButton" class="cancel-button btn-secondary">Cancelar</button>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Modal para añadir juego -->
+    <div id="formModalPrestamo" class="modal"  tabindex="0">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Préstamo</h2>
+          <span class="close" id="cerrarModalPrestamo">&times;</span>
+        </div>
+        <div class="modal-body">
+          <form id="prestarJuego"  enctype="multipart/form-data">
+            <!-- Campo oculto para el ID de la empresa -->
+            <input type="hidden" id="juegoId" value=""> <!-- ID de la empresa -->
+          
+            <div class="input-group" >
+              <label for="alumnoprestamo">Alumno:</label>
+              <input type="text" id="alumnoprestamo" name="alumnoprestamo" class="form-field" required>
+            </div>
+
+            <button type="submit" id="btn-prestar2" class="btn btn-secondary">Prestar</button>
+          </form>
+        </div>
+      </div>
+    </div>         
+  </div>  
+
+  <!-- Modal de Confirmación de Devolución -->
+  <div id="confirmDevolverModal" class="modal fade-in" style="display:none;">
+    <div class="modal-content devolver">
+      <span class="close" id="cerrarDevolverModal">&times;</span>
+      <div class="modal-header">
+        <h2>Confirmar Devolución</h2>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro de que deseas devolver este juego? Esta acción no se puede deshacer.</p>
+      </div>
+      <div class="modal-footer">
+        <button id="confirmDevolverButton" class="confirm-button btn-success">Sí
+        </button>
+        <button id="cancelarDevolverButton" class="cancel-button btn-secondary">Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Librerías de JavaScript necesarias -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Archivo de JavaScript para manejar la lógica del formulario y el modal -->
+  <script src="script.js"></script>
+</body>
+</html>
